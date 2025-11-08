@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Order</title>
+  <link rel="stylesheet" href="css/style_index.css">
+  <link rel="stylesheet" href="css/nav.css">
+</head>
+<body>
+  <nav> 
+    <div class="logo">
+      <h3><a href="merlin.html" class="logo-name">Sorde Fashion</a></h3>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="categories.html">Categories</a></li>
+      <li><a href="contact.html">ContactUs</a></li>
+      <li><a href="login.html" id="login">Login</a></li>
+    </ul>
+  </nav>
+
+  <h2 class="main-head-of-products">Your <span class="colored-word">Order Summary</span></h2>
+  <hr><br>
+
+  <div id="orderList"></div>
+
+  <center>
+    <button onclick="confirmOrder()">Confirm Order</button>
+  </center>
+
+  <script>
+    // Load order items from localStorage
+    const orderItems = JSON.parse(localStorage.getItem("orderItems")) || [];
+    const orderDiv = document.getElementById("orderList");
+
+    if (orderItems.length === 0) {
+      orderDiv.innerHTML = "<p>No items in your order.</p>";
+    } else {
+      orderDiv.innerHTML = "<ul>" + orderItems.map(item => `<li>${item}</li>`).join('') + "</ul>";
+    }
+
+    function confirmOrder() {
+      alert("Thank you! Your order has been placed successfully.");
+      localStorage.removeItem("orderItems");
+      localStorage.removeItem("cartItems");
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
